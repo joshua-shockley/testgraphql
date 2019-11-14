@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import logo from '../logo.svg';
 import '../styles/App.css';
 import Header from './Header.js';
@@ -7,8 +7,7 @@ import LinkList from './LinkList.js';
 import CreateLink from './CreateLink.js';
 import PersonList from './PersonList.js';
 import Login from './Login.js';
-
-// import CreateUser from './CreateUser.js';
+import Search from './Search';
 
 
 function App() {
@@ -17,11 +16,13 @@ function App() {
       <Header/>
         <div className="ph3 pv1 background-gray">
           <Switch>
-            <Route exact path="/" component={LinkList}/>
+            <Route exact path="/" render={() => <Redirect to="/new/1"/>}/>
+            <Route exact path="/top" component={LinkList}/>
+            <Route exact path="/new/:page" component={LinkList}/>
             <Route exact path="/people" component={PersonList}/>
             <Route exact path='/create' component={CreateLink}/>
             <Route exact path='/login' component={Login}/>
-            {/* <Route exact path="/createuser" component={CreateUser}/> */}
+            <Route exact path='/search' component={Search}/>
           </Switch>
         </div>
     </div>
