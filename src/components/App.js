@@ -8,9 +8,10 @@ import CreateLink from './CreateLink.js';
 import PersonList from './PersonList.js';
 import Login from './Login.js';
 import Search from './Search';
+import LinkCard from './LinkCard';
 
 
-function App() {
+function App(props) {
   return (
     <div className="center w85">
       <Header/>
@@ -23,6 +24,7 @@ function App() {
             <Route exact path='/create' component={CreateLink}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/search' component={Search}/>
+            <Route exact path='/card' render={(props) => (<LinkCard {...props} />)} />
           </Switch>
         </div>
     </div>

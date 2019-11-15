@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'urql'
 import gql from 'graphql-tag'
-import Link from './Link'
+import Links from './Links'
 
 const FEED_SEARCH_QUERY = gql`
   query FeedSearchQuery($filter: String!) {
@@ -53,7 +53,7 @@ const Search = () => {
         <button onClick={search}>search</button>
       </div>
       {links.map((link, index) => (
-        <Link key={link.id} link={link} index={index} />
+        <Links key={link.id} link={link} index={index} />
       ))}
     </div>
   )

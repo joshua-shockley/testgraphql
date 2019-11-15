@@ -1,9 +1,11 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from 'urql';
+import { Link } from 'react-router-dom'
 
 import { getToken } from '../token';
 import { timeDifferenceForDate } from '../dates';
+import LinkCard from './LinkCard';
 
 const VOTE_MUTATION = gql`
   mutation VoteMutation($linkId: ID!) {
@@ -22,7 +24,7 @@ const VOTE_MUTATION = gql`
 `
 
 
-const Link = ({ index, link }) => {
+const Links = ({ index, link }) => {
   const isLoggedIn = !!getToken()
 
   const [state, executeMutation] = useMutation(VOTE_MUTATION);
@@ -40,13 +42,13 @@ return(
     <span className="gray">{index + 1}.</span>
     {isLoggedIn && (
       <div className="ml1 gray f11" onClick={upvote}>
-        ▲
+        ▲ upvote
       </div>
     )}
   </div>
   <div className="ml1">
     <div>
-    {link.description}, ({link.url})-<button>delete</button>
+    {link.description}, ({link.url})-<button><Link to="/card">edit</Link> </button>
     </div>
     <div className="f6 lh-copy gray">
       {link.votes.length} votes | by{' '}
@@ -59,4 +61,4 @@ return(
 </div>
 )}
 
-export default Link
+export default Links

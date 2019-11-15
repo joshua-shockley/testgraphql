@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from './Link'
+import Links from './Links'
 import { useQuery } from 'urql';
 import gql from 'graphql-tag';
 
@@ -86,7 +86,7 @@ const LinkList = (props) => {
             <React.Fragment>
             <div> 
             {linksToRender.map((link, index) => (
-                <Link key = { link.id }
+                <Links key = { link.id }
                 link = { link }
                 index = { pageIndex + index } 
                 />
