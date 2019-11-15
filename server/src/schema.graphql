@@ -4,6 +4,8 @@ type Query {
   info: String!
   feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
   allUsers: [User!]
+  oneLink(id: ID!): Link!
+  oneUser(id: ID!): User!
 }
 
 enum LinkOrderByInput {
