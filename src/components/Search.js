@@ -33,7 +33,7 @@ const Search = () => {
   const [result, executeQuery] = useQuery({
       query: FEED_SEARCH_QUERY,
       variables: {filter},
-      pause: true,
+      pause: false,
   })
 
   const search = React.useCallback(() => {

@@ -29,15 +29,17 @@ query FEEDQUERY($first: Int, $skip: Int, $orderBy: LinkOrderByInput) {
 `
 
 const LinkList = (props) => {
+
+    const dyPgNm = 10;
         const isNewPage = props.location.pathname.includes('new');
 
-        const page = parseInt(props.match.params.page, 10);
+        const page = parseInt(props.match.params.page, dyPgNm);
 
 //in variables this sets the total viewed on the page to 10 at a time
 
         const variables = React.useMemo(() => ({
-            Skip: isNewPage ? (page - 1) * 10 : 0,
-            first: isNewPage ? 10 : 100,
+            skip: isNewPage ? (page - 1) * dyPgNm : 0,
+            first: isNewPage ? dyPgNm : 100,
             orderBy: isNewPage ? 'createdAt_DESC' : null
         }), [isNewPage, page])
 
@@ -46,10 +48,9 @@ const LinkList = (props) => {
 
 
                 
-        const pageIndex = isNewPage ? (page - 1) *10 : 0;
 // for const nextPage dependency array remove .feed.count or it will error out and wont render the page at all....
         const nextPage = React.useCallback(() => {
-            if (page <= data.feed.count / 10) {
+            if (page <= data.feed.count / dyPgNm) {
                 console.log(data);
               props.history.push(`/new/${page + 1}`);
             }
@@ -79,7 +80,7 @@ const LinkList = (props) => {
         if (fetching) return <div > Fetching Yo Shit!! </div>
         if (error) return <div> Error </div>
 
-        console.log(error);
+        const pageIndex = isNewPage ? (page - 1) *dyPgNm : 0;
 
 
         return ( 
